@@ -7,8 +7,16 @@ trigger:
 - master
 
 pool:
-  vmImage: 'Hosted Agent'
+  name:  'Azure Pipelines'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- script: |
+    echo "✅ Pipeline started"
+    echo "Agent name      : $(Agent.Name)"
+    echo "Agent pool      : $(Agent.PoolName)"
+    echo "Machine name    : $(Agent.MachineName)"
+    echo "OS              : $(Agent.OS)"
+    echo "Workspace       : $(Build.SourcesDirectory)"
+    echo "User            : $(whoami)"
+    uname -a
+  displayName: "Verify self-hosted agent"
